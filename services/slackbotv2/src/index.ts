@@ -4083,9 +4083,7 @@ async function setAssistantStatus(
   const normalizedStatus = normalizeAssistantStatus(status)
   const target = slackAssistantTarget(thread)
   const adapter = thread.adapter as SlackAssistantAdapter
-  // Keep shared-channel status behavior unchanged; use native lifecycle in DMs.
-  const nativeSessionStatus = options?.agentViewEnabled === true && target !== null
-    && thread.adapter.isDM?.(thread.id) === true
+  const nativeSessionStatus = options?.agentViewEnabled === true
   const hasStatusAdapter = nativeSessionStatus
     ? Boolean(adapter.setSessionStatus)
     : Boolean(adapter.setAssistantStatus)
